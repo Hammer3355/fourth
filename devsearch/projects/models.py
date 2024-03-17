@@ -23,6 +23,8 @@ class Project(models.Model):
         return self.title
 
 
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)  # Заполняется автоматически в момент создания.
