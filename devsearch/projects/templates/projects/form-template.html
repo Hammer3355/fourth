@@ -14,9 +14,8 @@
                     {% for field in form %}
                     <!-- Input:Text -->
                     <div class="form__field">
-                        <label for="formInput#text">Text Field: </label>
-                        <input class="input input--text" id="formInput#text" type="text" name="text"
-                            placeholder="Enter text" />
+                        <label for="formInput#text">{{ field.label }}</label>
+                        {{ field }}
                     </div>
                     {% endfor %}
 
