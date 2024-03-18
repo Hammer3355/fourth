@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Profile
 
 
 # ForeingKey - один ко многим
@@ -7,6 +8,7 @@ from django.db import models
 
 
 class Project(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=200)  # CharField - Короткое текстовое поле
     description = models.TextField(null=True,
                                    blank=True)  # TextField - Большое текстовое поле. Если поле  не заполнено, по умолчанию заполняется значением null.blank=True - Поле не ообязательное для заполнения.
