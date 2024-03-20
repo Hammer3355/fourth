@@ -3,7 +3,7 @@ from .models import Profile
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.contrib import messages
 
 
 def profiles(request):
@@ -37,7 +37,7 @@ def login_user(request):
         try:
             user = User.objects.get(username=username)
         except ObjectDoesNotExist:
-            print('Пользователь не существует')
+            messages.error(request, 'Пользователь не существует')
 
         user = authenticate(request, username=username, password=password)
 
@@ -45,11 +45,12 @@ def login_user(request):
             login(request, user)
             return redirect('profiles')
         else:
-            print('Логин или пароль не верны.')
+            messages.error(request, 'Логин или пароль не верны.')
 
     return render(request, 'users/login_register.html')
 
 
 def logout_user(request):
     logout(request)
+    messages.info(request, 'Вы вышли из аккаунта')
     return redirect('login')
