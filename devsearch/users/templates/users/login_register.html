@@ -12,6 +12,41 @@
 </form>
 	<p>Есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
 
+
+<div class="auth">
+      <div class="card">
+        <div class="auth__header text-center">
+          <a href="/">
+            <img src="{%  static 'images/logo.svg' %}" alt="icon" />
+          </a>
+          <h3>Регистрация пользователя</h3>
+          <p>Создайте новую учетную запись</p>
+        </div>
+
+        <form action="{% url 'register' %}" method="post" class="form auth__form">
+	        {% csrf_token %}
+	        {% for fild in form %}
+          <!-- Input:Text -->
+          <div class="form__field">
+            <label for="formInput#text">{{  fild.label }}</label>
+           {{fild}}
+          </div>
+	        {% endfor %}
+	        
+          
+          <div class="auth__actions">
+            <input class="btn btn--sub btn--lg" type="submit" value="Регистрация" />
+          </div>
+        </form>
+        <div class="auth__alternative">
+          <p>У вас уже есть учетная запись?</p>
+          <a href="{% url 'login' %}">Войти</a>
+        </div>
+      </div>
+    </div>
+
+
+
 {% else %}
 <div class="auth">
       <div class="card">
