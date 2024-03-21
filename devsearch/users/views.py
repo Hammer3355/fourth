@@ -4,6 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 
 def profiles(request):
@@ -54,3 +55,10 @@ def logout_user(request):
     logout(request)
     messages.info(request, 'Вы вышли из аккаунта')
     return redirect('login')
+
+
+def register_user(request):
+    page = 'register'
+    form = UserCreationForm()
+    context = {'page': page, 'form': form}
+    return render(request, 'users/login_register.html', context)
