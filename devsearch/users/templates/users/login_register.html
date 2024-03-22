@@ -4,13 +4,7 @@
 
 
 {% if page == 'register' %}
-	<h1>Регистрация</h1>
-<form action="{% url 'register' %}" method="post">
-	{% csrf_token %}
-	{{ form.as_p }}
-<input type="submit" value="Register User">
-</form>
-	<p>Есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+
 
 
 <div class="auth">
@@ -28,8 +22,13 @@
 	        {% for fild in form %}
           <!-- Input:Text -->
           <div class="form__field">
-            <label for="formInput#text">{{  fild.label }}</label>
+            <label for="formInput#text">{{ fild.label }}</label>
            {{fild}}
+	          
+<!--	          {% for error in field.errors %}-->
+<!--	            <p style="color: red;">{{ error }}</p>-->
+<!--	          {% endfor %}-->
+	          
           </div>
 	        {% endfor %}
 	        

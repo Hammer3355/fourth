@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def profiles(request):
@@ -77,3 +78,15 @@ def register_user(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'users/login_register.html', context)
+
+@login_required(login_url='login')
+def user_account(request):
+    prof = request.user.profile
+    skills = prof.skill_set.all() # _set используется когда нет доступа напрямую к полям модели
+    projects = prof.project_set.all()
+    context = {
+        'profile': prof,
+        'skills': skills,
+        'projects': projects
+    }
+    return render(request, 'users/account.html', context)
